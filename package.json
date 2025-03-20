@@ -1,0 +1,32 @@
+{
+  "name": "alioth-utils",
+  "private": false,
+  "version": "0.0.0",
+  "type": "module",
+  "author": "AliothStar",
+  "license": "Apache-2.0",
+  "keywords": [
+    "utils",
+    "console",
+    "color"
+  ],
+  "files": [
+    "dist/*"
+  ],
+  "main": "./dist/alioth-utils.umd.cjs",
+  "module": "./dist/alioth-utils.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "types": "./dist/index.d.ts",
+    "import": "./dist/alioth-utils.js",
+    "require": "./dist/alioth-utils.umd.cjs"
+  },
+  "scripts": {
+    "build": "tsc && vite build"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.2",
+    "vite": "^6.1.1",
+    "vite-plugin-dts": "^4.5.3"
+  }
+}
