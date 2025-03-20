@@ -10,6 +10,13 @@
     "console",
     "color"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dipper-alioth/alioth-utils.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dipper-alioth/alioth-utils/issues"
+  },
   "files": [
     "dist/*"
   ],
