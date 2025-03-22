@@ -1,8 +1,4 @@
-/**
- * @description 颜色类型
- */
-type ColorType = 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'default'
-
+import type { LogType, PrettyBgLog } from '../types/bgColorLogType'
 /**
  * @description 判断传入的值是否为空
  * @param {any} value 传入的值
@@ -14,10 +10,10 @@ const isEmpty = (value: any): boolean => {
 
 /**
  * @description 返回颜色值
- * @param {string} type 颜色类型 [ primary | success | warning | danger | info ]
+ * @param {string} type 日志类型 [ primary | success | warning | danger | info | default]
  * @returns {string} 颜色值
  */
-function colorType(type: ColorType = 'default') {
+function colorType(type: LogType = 'default'): string {
   let color = ''
   switch (type) {
     case 'primary':
@@ -49,9 +45,9 @@ function colorType(type: ColorType = 'default') {
  * @description 打印颜色日志
  * @param {string} title 日志标题
  * @param {string} text 日志内容
- * @param {ColorType} type 日志类型 [ primary | success | warning | danger | info ]
+ * @param {ColorType} type 日志类型 [ primary | success | warning | danger | info | default]
  */
-const printBackgroundColorLog = (title: string, text?: string, type?: ColorType) => {
+const printBackgroundColorLog = (title: string, text?: string, type?: LogType) => {
   /**
    * @description 使用console.log输出美化后的字符串
    * @param {string} title 日志标题
@@ -85,7 +81,7 @@ const printBackgroundColorLog = (title: string, text?: string, type?: ColorType)
  * @param {string} title 标题内容
  */
 const titlePrint = (title: string) => {
-  printBackgroundColorLog(title)
+  console.log(`%c ${title}`, 'font-size: 20px; font-weight: bold; color: #333;')
 }
 
 /**
@@ -107,7 +103,7 @@ const tablePrint = (title: string, data: any[]) => {
  * @param {string} url 图片地址
  * @param {number} scale 图片缩放比例
  */
-const imagePrint = (title: string, url: string, scale = 1) => {
+const imagePrint = (title: string, url: string, scale: number = 1) => {
   // 创建一个新的Image对象
   const img = new Image()
   // 设置图片的跨域属性
@@ -147,16 +143,14 @@ const imagePrint = (title: string, url: string, scale = 1) => {
 
 /**
  * @description 打印不同类型的日志信息
- * @param {string} titleOrContent 日志标题或内容
- * @param {string} content 日志内容
  */
-const prettyBgLog = () => {
+const prettyBgLog = (): PrettyBgLog => {
   /**
    * @description 打印主要信息
    * @param {string} titleOrContent 日志标题或内容
    * @param {string} content 日志内容
    */
-  const primary = (titleOrContent: string, content = '') => {
+  const primary = (titleOrContent: string, content: string = '') => {
     const title = isEmpty(content) ? 'Primary' : titleOrContent
     const text = isEmpty(content) ? titleOrContent : content
     printBackgroundColorLog(title, text, 'primary')
@@ -167,7 +161,7 @@ const prettyBgLog = () => {
    * @param {string} titleOrContent 日志标题或内容
    * @param {string} content 日志内容
    */
-  const info = (titleOrContent: string, content = '') => {
+  const info = (titleOrContent: string, content: string = '') => {
     const title = isEmpty(content) ? 'Info' : titleOrContent
     const text = isEmpty(content) ? titleOrContent : content
     printBackgroundColorLog(title, text, 'info')
@@ -178,7 +172,7 @@ const prettyBgLog = () => {
    * @param {string} titleOrContent 日志标题或内容
    * @param {string} content 日志内容
    */
-  const error = (titleOrContent: string, content = '') => {
+  const error = (titleOrContent: string, content: string = '') => {
     const title = isEmpty(content) ? 'Error' : titleOrContent
     const text = isEmpty(content) ? titleOrContent : content
     printBackgroundColorLog(title, text, 'danger')
@@ -189,7 +183,7 @@ const prettyBgLog = () => {
    * @param {string} titleOrContent 日志标题或内容
    * @param {string} content 日志内容
    */
-  const warning = (titleOrContent: string, content = '') => {
+  const warning = (titleOrContent: string, content: string = '') => {
     const title = isEmpty(content) ? 'Warning' : titleOrContent
     const text = isEmpty(content) ? titleOrContent : content
     printBackgroundColorLog(title, text, 'warning')
@@ -200,7 +194,7 @@ const prettyBgLog = () => {
    * @param {string} titleOrContent 日志标题或内容
    * @param {string} content 日志内容
    */
-  const success = (titleOrContent: string, content = '') => {
+  const success = (titleOrContent: string, content: string = '') => {
     const title = isEmpty(content) ? 'Success' : titleOrContent
     const text = isEmpty(content) ? titleOrContent : content
     printBackgroundColorLog(title, text, 'success')
@@ -217,8 +211,9 @@ const prettyBgLog = () => {
   /**
    * @description 打印表格
    * @param {string} title 表格标题
+   * @param {T[]} data 表格数据
    */
-  const table = (title: string, data: any[]) => {
+  const table = <T>(title: string, data: T[]) => {
     tablePrint(title, data)
   }
 
@@ -227,11 +222,9 @@ const prettyBgLog = () => {
    * @param {string} title 图片标题
    */
   const image = (title: string, imageUrl: string) => {
-    // 调用imagePrint函数，打印title和imageUrl
     imagePrint(title, imageUrl)
   }
 
-  // 返回一个对象，包含info、error、warning、success、title、table、image函数
   return {
     primary,
     info,
