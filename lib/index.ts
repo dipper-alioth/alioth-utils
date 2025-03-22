@@ -1,1 +1,1 @@
-export * from './utils/bgColorLog'
+export { aBgLog } from './utils/bgColorLog'
