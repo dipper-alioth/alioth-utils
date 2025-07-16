@@ -32,3 +32,5 @@ aBgLog.table('表格标题',T[])
 aBgLog.image('图片标题',url)
 ```
 
+
+
